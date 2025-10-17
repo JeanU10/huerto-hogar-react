@@ -1,11 +1,97 @@
 /* src/components/ProductCard/ProductCard.css */
+
 .product-card {
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
+  position: relative;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  background: white;
+  animation: fadeIn 0.6s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 12px 35px rgba(74, 155, 77, 0.25);
+}
+
+.product-card .card-img-top {
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .card-img-top {
+  transform: scale(1.15);
+}
+
+.product-card .badge {
+  z-index: 10;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.product-card .card-title {
+  color: var(--primary-green);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-card .card-text {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.product-card .btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.product-card .btn-success {
+  background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+  border: none;
+}
+
+.product-card .btn-success:hover {
+  background: linear-gradient(135deg, var(--secondary-green), var(--light-green));
+  transform: scale(1.05);
+}
+
+.product-card .btn-outline-success:hover {
+  transform: scale(1.05);
+}
+
+.product-card .fw-bold {
+  font-size: 1.5rem;
+  color: var(--secondary-green);
+}
+
+.product-card .text-decoration-line-through {
+  font-size: 1rem;
+}
+
+/* Animación al cargar */
+@keyframes productFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  
-  .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
+}
+
+.product-card {
+  animation: productFadeIn 0.5s ease;
+}
+
+/* Stock indicator */
+.product-card .text-muted.small {
+  font-weight: 500;
+}

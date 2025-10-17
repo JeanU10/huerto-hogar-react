@@ -1,34 +1,247 @@
 /* src/pages/Home/Home.css */
+
+.home-page {
+  animation: fadeIn 0.6s ease;
+}
+
+/* Hero Section Mejorado */
 .hero-section {
-    background: linear-gradient(135deg, #2d5f2e 0%, #4a9b4d 100%);
+  background: linear-gradient(135deg, #1e4620 0%, #2d5f2e 50%, #4a9b4d 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 !important;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/images/hero-bg.jpg') center/cover;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section h1 {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  animation: slideInLeft 0.8s ease;
+  margin-bottom: 1.5rem;
+}
+
+.hero-section p {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.2rem;
+  animation: slideInLeft 1s ease;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.hero-section .btn {
+  animation: slideInLeft 1.2s ease;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.hero-image {
+  font-size: 10rem;
+  animation: float 3s ease-in-out infinite;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Benefits Section */
+.benefits-section {
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+}
+
+.benefits-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+  animation: fadeIn 0.8s ease;
+}
+
+.benefits-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+  border-radius: 2px;
+}
+
+.benefit-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.benefits-section .col-md-3 {
+  animation: fadeIn 1s ease;
+}
+
+.benefits-section .col-md-3:nth-child(1) { animation-delay: 0.1s; }
+.benefits-section .col-md-3:nth-child(2) { animation-delay: 0.2s; }
+.benefits-section .col-md-3:nth-child(3) { animation-delay: 0.3s; }
+.benefits-section .col-md-3:nth-child(4) { animation-delay: 0.4s; }
+
+/* Categories Section */
+.categories-section {
+  background: #f8f9fa;
+  padding: 4rem 0;
+}
+
+.categories-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.8s ease;
+}
+
+.category-card {
+  border: none;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  animation: fadeIn 1s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(74, 155, 77, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9f0 100%);
+}
+
+.category-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--light-green);
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover .category-image img {
+  transform: rotate(360deg) scale(1.1);
+}
+
+/* Featured Products Section */
+.featured-products {
+  padding: 4rem 0;
+  background: white;
+}
+
+.featured-products h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.8s ease;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  padding: 4rem 0;
+}
+
+.testimonials-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.8s ease;
+}
+
+.testimonial-card {
+  height: 100%;
+  border: none;
+  border-left: 5px solid var(--secondary-green);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  animation: fadeIn 1.2s ease;
+  background: white;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(74, 155, 77, 0.2);
+  border-left-width: 8px;
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: var(--dark-gray);
+  font-size: 1.05rem;
+}
+
+.testimonial-card footer {
+  font-weight: 500;
+  color: var(--secondary-green);
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+}
+
+.cta-section::before {
+  content: '🌱🥕🍎';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  font-size: 15rem;
+  opacity: 0.1;
+  animation: float 4s ease-in-out infinite;
+}
+
+.cta-section h2 {
+  color: white;
+  animation: slideInRight 0.8s ease;
+}
+
+.cta-section p {
+  color: rgba(255,255,255,0.95);
+  animation: slideInRight 1s ease;
+}
+
+.cta-section .btn {
+  animation: slideInRight 1.2s ease;
+  font-size: 1.1rem;
+  padding: 0.8rem 2.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
   }
   
   .hero-image {
-    font-size: 8rem;
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    font-size: 5rem;
   }
   
   .benefit-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   
-  .category-card {
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: none;
+  .benefits-section h2,
+  .categories-section h2,
+  .featured-products h2,
+  .testimonials-section h2 {
+    font-size: 1.8rem;
   }
-  
-  .category-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
-  
-  .testimonial-card {
-    height: 100%;
-    border-left: 4px solid #28a745;
-  }
-  
+}

@@ -1,6 +1,74 @@
 /* src/components/Footer/Footer.css */
+
+footer {
+  background: linear-gradient(135deg, #1e4620 0%, #2d5f2e 100%);
+  color: white;
+  margin-top: 4rem;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+}
+
+footer h5 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+footer h5::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--light-green);
+  border-radius: 2px;
+}
+
+footer a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 0.3rem 0;
+}
+
 footer a:hover {
-    color: #28a745 !important;
-    transition: color 0.3s;
+  color: var(--light-green);
+  transform: translateX(5px);
+  padding-left: 5px;
+}
+
+footer .list-unstyled li {
+  margin-bottom: 0.5rem;
+}
+
+footer hr {
+  background-color: rgba(255,255,255,0.2);
+  margin: 2rem 0 1.5rem;
+}
+
+footer .text-muted {
+  color: rgba(255,255,255,0.7) !important;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
   }
   
+  footer h5::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  footer a:hover {
+    transform: translateX(0);
+    padding-left: 0;
+  }
+}
