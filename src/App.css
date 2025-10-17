@@ -1,12 +1,306 @@
 /* src/App.css */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-green: #2d5f2e;
+  --secondary-green: #4a9b4d;
+  --light-green: #7bc47f;
+  --accent-orange: #ff8a3d;
+  --dark-gray: #2c3e50;
+  --light-gray: #ecf0f1;
+  --white: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--dark-gray);
+  background-color: #fafafa;
+  line-height: 1.6;
+}
+
+/* Animaciones globales */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Layout principal */
 .min-vh-100 {
   min-height: 100vh;
 }
 
 .flex-grow-1 {
   flex-grow: 1;
+}
+
+/* Títulos y textos */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+.lead {
+  font-size: 1.15rem;
+  font-weight: 300;
+}
+
+/* Botones mejorados */
+.btn {
+  font-weight: 500;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  border: none;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, var(--secondary-green) 0%, var(--light-green) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline-success {
+  border: 2px solid var(--secondary-green);
+  color: var(--secondary-green);
+  background: transparent;
+}
+
+.btn-outline-success:hover {
+  background: var(--secondary-green);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Cards mejoradas */
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+
+.card-img-top {
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+/* Badges */
+.badge {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* Inputs y Forms */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 2px solid var(--light-gray);
+  padding: 0.7rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--secondary-green);
+  box-shadow: 0 0 0 0.2rem rgba(74, 155, 77, 0.25);
+}
+
+/* Tablas */
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.table thead {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  color: white;
+}
+
+/* Imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-fluid {
+  border-radius: 8px;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: var(--secondary-green);
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--light-green);
+}
+
+/* Alertas */
+.alert {
+  border: none;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  animation: slideInRight 0.5s ease;
+}
+
+/* Spinners y Loaders */
+.spinner-border {
+  color: var(--secondary-green);
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-green);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-green);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .lead {
+    font-size: 1rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Clases de utilidad */
+.text-primary-green {
+  color: var(--primary-green);
+}
+
+.bg-primary-green {
+  background-color: var(--primary-green);
+}
+
+.text-secondary-green {
+  color: var(--secondary-green);
+}
+
+.bg-secondary-green {
+  background-color: var(--secondary-green);
+}
+
+.shadow-custom {
+  box-shadow: var(--shadow);
+}
+
+.shadow-custom-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.border-radius-custom {
+  border-radius: 12px;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.6s ease;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.6s ease;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
 }
