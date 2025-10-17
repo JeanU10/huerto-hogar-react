@@ -1,0 +1,6 @@
+/* src/components/Footer/Footer.css */
+footer a:hover {
+    color: #28a745 !important;
+    transition: color 0.3s;
+  }
+  
