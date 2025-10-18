@@ -10,7 +10,8 @@ const STORAGE_KEYS = {
 };
 
 const initializeData = () => {
-  if (!localStorage.getItem(STORAGE_KEYS.PRODUCTS)) {
+  // Forzar actualización de datos para corregir rutas de imágenes
+  if (!localStorage.getItem(STORAGE_KEYS.PRODUCTS) || localStorage.getItem('huerto_data_updated') !== 'v3') {
     const defaultProducts = [
       {
         id: 1,
@@ -94,7 +95,7 @@ const initializeData = () => {
         precio: 2200,
         stock: 28,
         categoria: 'verduras',
-        imagen: '/images/products/lechugas.jpg',
+        imagen: '/images/products/espinacas.jpg',
         enOferta: false,
         destacado: true,
         unidad: 'kg'
@@ -106,7 +107,7 @@ const initializeData = () => {
         precio: 4500,
         stock: 15,
         categoria: 'frutas',
-        imagen: '/images/products/manzanas.jpg',
+        imagen: '/images/products/fresas.jpg',
         enOferta: true,
         precioOferta: 3800,
         destacado: true,
@@ -114,9 +115,10 @@ const initializeData = () => {
       }
     ];
     localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(defaultProducts));
+    localStorage.setItem('huerto_data_updated', 'v2');
   }
 
-  if (!localStorage.getItem(STORAGE_KEYS.CATEGORIES)) {
+  if (!localStorage.getItem(STORAGE_KEYS.CATEGORIES) || localStorage.getItem('huerto_data_updated') !== 'v2') {
     const defaultCategories = [
       { 
         id: 1, 
@@ -152,9 +154,10 @@ const initializeData = () => {
       }
     ];
     localStorage.setItem(STORAGE_KEYS.CATEGORIES, JSON.stringify(defaultCategories));
+    localStorage.setItem('huerto_data_updated', 'v2');
   }
 
-  if (!localStorage.getItem(STORAGE_KEYS.BLOGS)) {
+  if (!localStorage.getItem(STORAGE_KEYS.BLOGS) || localStorage.getItem('huerto_data_updated') !== 'v2') {
     const defaultBlogs = [
       {
         id: 1,
@@ -188,6 +191,7 @@ const initializeData = () => {
       }
     ];
     localStorage.setItem(STORAGE_KEYS.BLOGS, JSON.stringify(defaultBlogs));
+    localStorage.setItem('huerto_data_updated', 'v2');
   }
 
   if (!localStorage.getItem(STORAGE_KEYS.CART)) {
