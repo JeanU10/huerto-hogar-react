@@ -1,70 +1,257 @@
-# Getting Started with Create React App
+# 🌱 HuertoHogar - Plataforma de Productos Orgánicos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="public/images/logo.png" alt="HuertoHogar Logo" width="200" height="200">
+  
+  **Conectando el campo con tu hogar**
+  
+  [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
+  [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.0-purple.svg)](https://getbootstrap.com/)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+</div>
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📋 Descripción del Proyecto
 
-### `npm start`
+**HuertoHogar** es una plataforma web innovadora que conecta directamente a las familias chilenas con productores locales de alimentos orgánicos y frescos. Nuestra misión es promover una alimentación saludable y sostenible, apoyando a los agricultores locales mientras cuidamos el medio ambiente.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🧑‍💻 Desarrollado por:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Jean P. Valenzuela Navarrete**
+- **Matias Eduardo Reyes Agilera**
+- **Cristobal Andres Cea Guzman**
 
-### `npm test`
+### 🎯 Objetivos Principales
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frescura Garantizada**: Productos directamente del campo a tu mesa
+- **Sostenibilidad**: Apoyo a la agricultura orgánica y prácticas responsables
+- **Comunidad Local**: Conexión directa con productores chilenos
+- **Accesibilidad**: Cobertura nacional con entrega a domicilio
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ✨ Características Principales
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 🛒 **E-commerce Completo**
+- Catálogo de productos organizados por categorías
+- Carrito de compras intuitivo
+- Sistema de ofertas y productos destacados
+- Proceso de checkout seguro
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 📱 **Experiencia de Usuario**
+- Diseño responsive y moderno
+- Navegación intuitiva
+- Búsqueda y filtrado de productos
+- Sistema de autenticación de usuarios
 
-### `npm run eject`
+### 🌿 **Categorías de Productos**
+- **Frutas**: Manzanas, fresas y más frutas de temporada
+- **Verduras**: Lechugas, tomates, zanahorias, espinacas
+- **Lácteos**: Leche fresca de granjas locales
+- **Procesados**: Miel natural y productos artesanales
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 📚 **Contenido Educativo**
+- Blog con artículos sobre alimentación saludable
+- Guías para iniciar tu propio huerto casero
+- Recetas con ingredientes orgánicos
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🚀 Tecnologías Utilizadas
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Frontend
+- **React 18.2.0** - Biblioteca de interfaz de usuario
+- **React Router** - Navegación entre páginas
+- **Bootstrap 5.3.0** - Framework CSS para diseño responsive
+- **React Bootstrap** - Componentes Bootstrap para React
 
-## Learn More
+### Desarrollo
+- **Create React App** - Herramienta de configuración inicial
+- **ESLint** - Linter para mantener calidad de código
+- **Jest** - Framework de testing
+- **Webpack** - Bundler de módulos
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Almacenamiento
+- **LocalStorage** - Persistencia de datos del cliente
+- **Context API** - Gestión de estado global
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 📦 Instalación y Configuración
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Prerrequisitos
+- Node.js (versión 14 o superior)
+- npm o yarn
 
-### Analyzing the Bundle Size
+### Pasos de Instalación
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/tu-usuario/huerto-hogar-react.git
+   cd huerto-hogar-react
+   ```
 
-### Making a Progressive Web App
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. **Ejecutar en modo desarrollo**
+   ```bash
+   npm start
+   ```
 
-### Advanced Configuration
+4. **Abrir en el navegador**
+   ```
+   http://localhost:3000
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🛠️ Scripts Disponibles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Comando | Descripción |
+|---------|-------------|
+| `npm start` | Ejecuta la aplicación en modo desarrollo |
+| `npm test` | Ejecuta las pruebas unitarias |
+| `npm run build` | Construye la aplicación para producción |
+| `npm run eject` | Expone la configuración de webpack |
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📁 Estructura del Proyecto
+
+```
+huerto-hogar-react/
+├── public/
+│   ├── images/
+│   │   ├── categories/     # Imágenes de categorías
+│   │   ├── products/       # Imágenes de productos
+│   │   └── blog/          # Imágenes del blog
+│   └── index.html
+├── src/
+│   ├── components/         # Componentes reutilizables
+│   │   ├── CartItem/
+│   │   ├── CategoryCard/
+│   │   ├── Footer/
+│   │   ├── Navbar/
+│   │   └── ProductCard/
+│   ├── context/           # Context API para estado global
+│   ├── data/              # Datos mock y funciones de datos
+│   ├── pages/             # Páginas principales
+│   │   ├── Admin/         # Panel de administración
+│   │   ├── Auth/          # Autenticación
+│   │   ├── Blog/          # Blog y artículos
+│   │   ├── Cart/          # Carrito de compras
+│   │   ├── Categories/    # Categorías de productos
+│   │   ├── Checkout/      # Proceso de compra
+│   │   ├── Home/          # Página principal
+│   │   └── Products/      # Catálogo de productos
+│   └── routes/            # Configuración de rutas
+└── package.json
+```
+
+---
+
+## 🎨 Diseño y UX
+
+### Paleta de Colores
+- **Verde Principal**: #2d5f2e (Naturaleza y frescura)
+- **Verde Secundario**: #4a9b4d (Crecimiento y vida)
+- **Verde Claro**: #e8f5e8 (Fondo suave)
+- **Gris Oscuro**: #333 (Texto principal)
+
+### Características de Diseño
+- **Responsive Design**: Adaptable a todos los dispositivos
+- **Animaciones Suaves**: Transiciones y efectos visuales
+- **Tipografía Clara**: Legibilidad optimizada
+- **Iconografía Intuitiva**: Emojis y símbolos familiares
+
+---
+
+## 🔧 Funcionalidades Técnicas
+
+### Gestión de Estado
+- **Context API** para autenticación de usuarios
+- **LocalStorage** para persistencia de datos
+- **Estado local** para componentes específicos
+
+### Rutas y Navegación
+- **React Router** para navegación SPA
+- **Guards de rutas** para protección de páginas
+- **Navegación programática** para mejor UX
+
+### Optimización
+- **Lazy Loading** para componentes pesados
+- **Code Splitting** para mejor rendimiento
+- **Optimización de imágenes** para carga rápida
+
+---
+
+## 📈 Roadmap Futuro
+
+### Versión 2.0
+- [ ] Integración con API backend
+- [ ] Sistema de pagos en línea
+- [ ] Notificaciones push
+- [ ] App móvil nativa
+
+### Versión 3.0
+- [ ] Inteligencia artificial para recomendaciones
+- [ ] Sistema de suscripciones
+- [ ] Marketplace para productores
+- [ ] Análisis de datos avanzado
+
+---
+
+## 🤝 Contribución
+
+### Cómo Contribuir
+1. Fork del proyecto
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
+
+### Estándares de Código
+- Seguir las convenciones de ESLint
+- Escribir tests para nuevas funcionalidades
+- Documentar cambios importantes
+- Mantener la coherencia del diseño
+
+---
+
+## 📞 Contacto y Soporte
+
+### Información de Contacto
+- **Email**: contacto@huertohogar.cl
+- **Teléfono**: +56 9 1234 5678
+- **Dirección**: Santiago, Chile
+
+### Soporte Técnico
+- **Documentación**: [docs.huertohogar.cl](https://docs.huertohogar.cl)
+- **Issues**: [GitHub Issues](https://github.com/tu-usuario/huerto-hogar-react/issues)
+- **Discord**: [Comunidad HuertoHogar](https://discord.gg/huertohogar)
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+## 🙏 Agradecimientos
+
+- **Productores Locales** - Por su dedicación y calidad
+- **Comunidad React** - Por las herramientas y recursos
+- **Bootstrap Team** - Por el framework CSS
+- **Contribuidores** - Por su tiempo y esfuerzo
+
+---
+
+<div align="center">
+  <p>Hecho con ❤️ por el equipo de HuertoHogar</p>
+  <p>© 2024 HuertoHogar. Todos los derechos reservados.</p>
+</div>
