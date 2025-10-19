@@ -253,5 +253,5 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 <div align="center">
   <p>Hecho con ❤️ por el equipo de HuertoHogar</p>
-  <p>© 2024 HuertoHogar. Todos los derechos reservados.</p>
+  <p>© 2025 HuertoHogar. Todos los derechos reservados.</p>
 </div>
