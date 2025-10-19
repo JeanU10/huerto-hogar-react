@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Badge, Form, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getProducts, deleteProduct } from '../../data/mockData';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -33,7 +35,13 @@ const ProductsList = () => {
     if (window.confirm(`¿Estás seguro de eliminar "${nombre}"?`)) {
       deleteProduct(id);
       loadProducts();
-      alert('Producto eliminado correctamente');
+      toast.success(
+        <div>
+          <strong>Producto eliminado</strong>
+          <div className="small mt-1">{nombre}</div>
+        </div>,
+        { icon: "🗑️" }
+      );
     }
   };
 

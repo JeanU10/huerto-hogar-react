@@ -1,7 +1,8 @@
-// src/components/ProductCard/ProductCard.jsx
+// src/components/ProductCard/ProductCard.jsx (ACTUALIZADO)
 import React from 'react';
 import { Card, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { addToCart } from '../../data/mockData';
 import './ProductCard.css';
 
@@ -9,7 +10,18 @@ const ProductCard = ({ product }) => {
   const handleAddToCart = () => {
     addToCart(product.id, 1);
     window.dispatchEvent(new Event('cartUpdated'));
-    alert(`${product.nombre} agregado al carrito`);
+    
+    // Notificación Toast personalizada
+    toast.success(
+      <div>
+        <strong>{product.nombre}</strong> agregado al carrito
+        <div className="mt-1 small">Cantidad: 1 {product.unidad}</div>
+      </div>,
+      {
+        icon: "🛒",
+        position: "bottom-right"
+      }
+    );
   };
 
   const precioFinal = product.enOferta ? product.precioOferta : product.precio;
@@ -25,7 +37,7 @@ const ProductCard = ({ product }) => {
         variant="top" 
         src={product.imagen} 
         alt={product.nombre}
-        style={{ height: '200px', objectFit: 'cover' }}
+        style={{ height: '250px', objectFit: 'cover' }}
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title>{product.nombre}</Card.Title>
@@ -42,9 +54,10 @@ const ProductCard = ({ product }) => {
             <span className="fw-bold text-success fs-5">
               ${precioFinal.toLocaleString()}
             </span>
+            <span className="text-muted ms-2 small">/ {product.unidad}</span>
           </div>
           <div className="text-muted small mb-2">
-            Stock disponible: {product.stock}
+            Stock: {product.stock} {product.unidad}
           </div>
           <div className="d-grid gap-2">
             <Button 
@@ -52,7 +65,7 @@ const ProductCard = ({ product }) => {
               onClick={handleAddToCart}
               disabled={product.stock === 0}
             >
-              Añadir al carrito
+              {product.stock === 0 ? 'Sin Stock' : 'Añadir al carrito'}
             </Button>
             <Button 
               as={Link} 

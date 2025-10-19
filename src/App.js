@@ -1,10 +1,13 @@
-// src/App.js
+// src/App.js (ACTUALIZADO con ToastContainer)
+// src/App.js (COMPLETO CON AUTH)
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from './context/AuthContext';
+import { AdminRoute } from './routes/guards';
 import NavbarComponent from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
-
-// Páginas públicas
 import Home from './pages/Home/Home';
 import Products from './pages/Products/Products';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
@@ -20,18 +23,10 @@ import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
 import PaymentError from './pages/PaymentError/PaymentError';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
-
-// Páginas de administración
 import Dashboard from './pages/Admin/Dashboard';
 import ProductsList from './pages/Admin/ProductsList';
 import ProductForm from './pages/Admin/ProductForm';
 import OrdersList from './pages/Admin/OrdersList';
-
-// Contexto y protección de rutas
-import { AuthProvider } from './context/AuthContext';
-import { AdminRoute } from './routes/guards';
-
-// Estilos
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -60,8 +55,8 @@ function App() {
               <Route path="/pago-error" element={<PaymentError />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-
-              {/* Rutas protegidas para Admin */}
+              
+              {/* Rutas de administración protegidas */}
               <Route element={<AdminRoute />}>
                 <Route path="/admin" element={<Dashboard />} />
                 <Route path="/admin/productos" element={<ProductsList />} />
@@ -72,6 +67,19 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </div>
       </AuthProvider>
     </Router>

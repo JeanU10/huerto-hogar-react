@@ -1,24 +1,22 @@
-// src/components/Navbar/Navbar.jsx
+// src/components/Navbar/Navbar.jsx (CON AUTH)
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
-import { getCart, getCartTotal } from '../../data/mockData';
+import { Link, useNavigate } from 'react-router-dom';
+import { Navbar, Nav, Container, Badge, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { useAuth } from '../../context/AuthContext';
+import { getCart, getCartTotal } from '../../data/mockData';
 import './Navbar.css';
 
 const NavbarComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-
-  // 🔐 AuthContext
-  const { isAuthenticated, role, logout } = useAuth();
+  const { isAuthenticated, role, email, logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     updateCartInfo();
     window.addEventListener('cartUpdated', updateCartInfo);
-    return () => {
-      window.removeEventListener('cartUpdated', updateCartInfo);
-    };
+    return () => window.removeEventListener('cartUpdated', updateCartInfo);
   }, []);
 
   const updateCartInfo = () => {
@@ -26,6 +24,12 @@ const NavbarComponent = () => {
     const total = getCartTotal();
     setCartItems(cart);
     setCartTotal(total);
+  };
+
+  const handleLogout = () => {
+    logout();
+    toast.info('Sesión cerrada', { icon: '👋' });
+    navigate('/');
   };
 
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -46,26 +50,28 @@ const NavbarComponent = () => {
             <Nav.Link as={Link} to="/nosotros">Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/blog">Blog</Nav.Link>
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
-
-            {/* 🔐 Mostrar ruta Admin solo si el usuario es admin */}
             {role === 'admin' && (
-              <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
+              <Nav.Link as={Link} to="/admin">👨‍💼 Admin</Nav.Link>
             )}
           </Nav>
-
           <Nav>
-            {/* 🔐 Mostrar opciones según autenticación */}
             {isAuthenticated ? (
-              <Nav.Link onClick={logout}>Salir</Nav.Link>
+              <>
+                <Nav.Item className="d-flex align-items-center text-white me-3">
+                  <small>👤 {email}</small>
+                </Nav.Item>
+                <Button variant="outline-light" size="sm" onClick={handleLogout}>
+                  Salir
+                </Button>
+              </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/login">Iniciar Sesión</Nav.Link>
                 <Nav.Link as={Link} to="/register">Crear Cuenta</Nav.Link>
               </>
             )}
-
-            <Nav.Link as={Link} to="/carrito" className="position-relative">
-              🛒 Carrito ${cartTotal.toLocaleString()}
+            <Nav.Link as={Link} to="/carrito" className="position-relative ms-2">
+              🛒 ${cartTotal.toLocaleString()}
               {cartItemCount > 0 && (
                 <Badge bg="danger" className="position-absolute top-0 start-100 translate-middle">
                   {cartItemCount}

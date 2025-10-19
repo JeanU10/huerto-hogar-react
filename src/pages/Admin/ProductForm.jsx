@@ -1,8 +1,10 @@
 // src/pages/Admin/ProductForm.jsx
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Button, Row, Col, Card, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProductById, createProduct, updateProduct } from '../../data/mockData';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductForm = () => {
   const { id } = useParams();
@@ -23,7 +25,6 @@ const ProductForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     if (isEditMode) {
@@ -47,7 +48,7 @@ const ProductForm = () => {
       ...formData,
       [name]: type === 'checkbox' ? checked : value
     });
-    
+
     if (errors[name]) {
       setErrors({ ...errors, [name]: '' });
     }
@@ -55,31 +56,24 @@ const ProductForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
     if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es requerido';
     if (!formData.descripcion.trim()) newErrors.descripcion = 'La descripción es requerida';
-    if (!formData.precio || parseFloat(formData.precio) <= 0) {
-      newErrors.precio = 'El precio debe ser mayor a 0';
-    }
-    if (!formData.stock || parseInt(formData.stock) < 0) {
-      newErrors.stock = 'El stock debe ser 0 o mayor';
-    }
-    if (formData.enOferta && (!formData.precioOferta || parseFloat(formData.precioOferta) <= 0)) {
-      newErrors.precioOferta = 'El precio de oferta es requerido si está en oferta';
-    }
-    if (formData.enOferta && parseFloat(formData.precioOferta) >= parseFloat(formData.precio)) {
-      newErrors.precioOferta = 'El precio de oferta debe ser menor al precio regular';
-    }
-    
+    if (!formData.precio || parseFloat(formData.precio) <= 0) newErrors.precio = 'El precio debe ser mayor a 0';
+    if (!formData.stock || parseInt(formData.stock) < 0) newErrors.stock = 'El stock debe ser 0 o mayor';
+    if (formData.enOferta && (!formData.precioOferta || parseFloat(formData.precioOferta) <= 0)) newErrors.precioOferta = 'El precio de oferta es requerido si está en oferta';
+    if (formData.enOferta && parseFloat(formData.precioOferta) >= parseFloat(formData.precio)) newErrors.precioOferta = 'El precio de oferta debe ser menor al precio regular';
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      toast.error('Por favor corrige los errores del formulario', {
+        icon: "❌"
+      });
       return;
     }
 
@@ -92,16 +86,24 @@ const ProductForm = () => {
 
     if (isEditMode) {
       updateProduct(id, productData);
-      setShowSuccess(true);
-      setTimeout(() => {
-        navigate('/admin/productos');
-      }, 1500);
+      toast.success(
+        <div>
+          <strong>Producto actualizado</strong>
+          <div className="small mt-1">{formData.nombre}</div>
+        </div>,
+        { icon: "✅" }
+      );
+      setTimeout(() => navigate('/admin/productos'), 1500);
     } else {
       createProduct(productData);
-      setShowSuccess(true);
-      setTimeout(() => {
-        navigate('/admin/productos');
-      }, 1500);
+      toast.success(
+        <div>
+          <strong>Producto creado exitosamente</strong>
+          <div className="small mt-1">{formData.nombre}</div>
+        </div>,
+        { icon: "✨" }
+      );
+      setTimeout(() => navigate('/admin/productos'), 1500);
     }
   };
 
@@ -116,12 +118,6 @@ const ProductForm = () => {
             </Button>
           </div>
 
-          {showSuccess && (
-            <Alert variant="success">
-              Producto {isEditMode ? 'actualizado' : 'creado'} correctamente. Redirigiendo...
-            </Alert>
-          )}
-
           <Form onSubmit={handleSubmit}>
             <Row>
               <Col md={6}>
@@ -134,20 +130,14 @@ const ProductForm = () => {
                     onChange={handleChange}
                     isInvalid={!!errors.nombre}
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.nombre}
-                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">{errors.nombre}</Form.Control.Feedback>
                 </Form.Group>
               </Col>
 
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Categoría *</Form.Label>
-                  <Form.Select
-                    name="categoria"
-                    value={formData.categoria}
-                    onChange={handleChange}
-                  >
+                  <Form.Select name="categoria" value={formData.categoria} onChange={handleChange}>
                     <option value="frutas">Frutas</option>
                     <option value="verduras">Verduras</option>
                     <option value="lacteos">Lácteos</option>
@@ -167,9 +157,7 @@ const ProductForm = () => {
                 onChange={handleChange}
                 isInvalid={!!errors.descripcion}
               />
-              <Form.Control.Feedback type="invalid">
-                {errors.descripcion}
-              </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{errors.descripcion}</Form.Control.Feedback>
             </Form.Group>
 
             <Row>
@@ -183,9 +171,7 @@ const ProductForm = () => {
                     onChange={handleChange}
                     isInvalid={!!errors.precio}
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.precio}
-                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">{errors.precio}</Form.Control.Feedback>
                 </Form.Group>
               </Col>
 
@@ -199,20 +185,14 @@ const ProductForm = () => {
                     onChange={handleChange}
                     isInvalid={!!errors.stock}
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.stock}
-                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">{errors.stock}</Form.Control.Feedback>
                 </Form.Group>
               </Col>
 
               <Col md={4}>
                 <Form.Group className="mb-3">
                   <Form.Label>Unidad de Medida</Form.Label>
-                  <Form.Select
-                    name="unidad"
-                    value={formData.unidad}
-                    onChange={handleChange}
-                  >
+                  <Form.Select name="unidad" value={formData.unidad} onChange={handleChange}>
                     <option value="kg">Kilogramo (kg)</option>
                     <option value="unidad">Unidad</option>
                     <option value="litro">Litro</option>
@@ -258,9 +238,7 @@ const ProductForm = () => {
                       onChange={handleChange}
                       isInvalid={!!errors.precioOferta}
                     />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.precioOferta}
-                    </Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">{errors.precioOferta}</Form.Control.Feedback>
                   </Form.Group>
                 )}
               </Col>

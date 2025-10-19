@@ -304,3 +304,35 @@ a:hover {
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
+
+
+/* Toast Customizations */
+.Toastify__toast-container {
+  font-family: 'Poppins', sans-serif;
+}
+
+.Toastify__toast {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  font-weight: 500;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #2d5f2e 0%, #4a9b4d 100%);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #f57c00 0%, #ffa726 100%);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.8);
+}

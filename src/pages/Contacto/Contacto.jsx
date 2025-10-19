@@ -1,6 +1,8 @@
 // src/pages/Contacto/Contacto.jsx
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contacto = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +11,6 @@ const Contacto = () => {
     asunto: '',
     mensaje: ''
   });
-  const [showAlert, setShowAlert] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -21,9 +22,16 @@ const Contacto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Formulario enviado:', formData);
-    setShowAlert(true);
+
+    toast.success(
+      <div>
+        <strong>¡Mensaje enviado!</strong>
+        <div className="small mt-1">Te responderemos pronto a {formData.correo}</div>
+      </div>,
+      { icon: "📧" }
+    );
+
     setFormData({ nombre: '', correo: '', asunto: '', mensaje: '' });
-    setTimeout(() => setShowAlert(false), 5000);
   };
 
   return (
@@ -35,12 +43,6 @@ const Contacto = () => {
           <Card className="mb-4">
             <Card.Body>
               <h4 className="mb-3">Envíanos un mensaje</h4>
-              
-              {showAlert && (
-                <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
-                  ¡Mensaje enviado correctamente! Te responderemos pronto.
-                </Alert>
-              )}
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">

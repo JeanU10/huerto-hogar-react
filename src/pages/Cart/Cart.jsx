@@ -1,7 +1,8 @@
-// src/pages/Cart/Cart.jsx
+// src/pages/Cart/Cart.jsx (ACTUALIZADO con notificaciones)
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Image } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getCart, updateCartItem, removeFromCart, clearCart, getCartTotal } from '../../data/mockData';
 
 const Cart = () => {
@@ -20,17 +21,26 @@ const Cart = () => {
     setTotal(totalAmount);
   };
 
-  const handleQuantityChange = (productId, newQuantity) => {
+  const handleQuantityChange = (productId, newQuantity, productName) => {
     if (newQuantity < 1) return;
     updateCartItem(productId, newQuantity);
     loadCart();
     window.dispatchEvent(new Event('cartUpdated'));
+    
+    toast.info(`Cantidad actualizada: ${productName}`, {
+      icon: "🔄",
+      autoClose: 2000
+    });
   };
 
-  const handleRemove = (productId) => {
+  const handleRemove = (productId, productName) => {
     removeFromCart(productId);
     loadCart();
     window.dispatchEvent(new Event('cartUpdated'));
+    
+    toast.warning(`${productName} eliminado del carrito`, {
+      icon: "🗑️"
+    });
   };
 
   const handleClearCart = () => {
@@ -38,12 +48,18 @@ const Cart = () => {
       clearCart();
       loadCart();
       window.dispatchEvent(new Event('cartUpdated'));
+      
+      toast.error('Carrito vaciado', {
+        icon: "🧹"
+      });
     }
   };
 
   const handleCheckout = () => {
     if (cartItems.length === 0) {
-      alert('El carrito está vacío');
+      toast.warning('El carrito está vacío', {
+        icon: "⚠️"
+      });
       return;
     }
     navigate('/checkout');
@@ -52,10 +68,11 @@ const Cart = () => {
   if (cartItems.length === 0) {
     return (
       <Container className="py-5 text-center">
-        <h2>Tu carrito está vacío</h2>
+        <div style={{ fontSize: '5rem' }}>🛒</div>
+        <h2 className="mt-3">Tu carrito está vacío</h2>
         <p className="text-muted mt-3">¡Agrega productos para comenzar tu compra!</p>
         <Button as={Link} to="/productos" variant="success" size="lg" className="mt-3">
-          Ver Productos
+          🌱 Explorar Productos
         </Button>
       </Container>
     );
@@ -63,10 +80,10 @@ const Cart = () => {
 
   return (
     <Container className="py-5">
-      <h1 className="mb-4">Carrito de Compras</h1>
+      <h1 className="mb-4">🛒 Carrito de Compras</h1>
       
       <Table responsive striped bordered hover>
-        <thead>
+        <thead className="table-dark">
           <tr>
             <th>Imagen</th>
             <th>Nombre</th>
@@ -87,35 +104,38 @@ const Cart = () => {
                   rounded
                 />
               </td>
-              <td>{item.nombre}</td>
+              <td>
+                <strong>{item.nombre}</strong>
+                <div className="small text-muted">{item.unidad}</div>
+              </td>
               <td>${item.precio.toLocaleString()}</td>
               <td>
                 <div className="d-flex align-items-center">
                   <Button 
                     variant="outline-secondary" 
                     size="sm"
-                    onClick={() => handleQuantityChange(item.productId, item.quantity - 1)}
+                    onClick={() => handleQuantityChange(item.productId, item.quantity - 1, item.nombre)}
                   >
-                    -
+                    −
                   </Button>
-                  <span className="mx-3">{item.quantity}</span>
+                  <span className="mx-3 fw-bold">{item.quantity}</span>
                   <Button 
                     variant="outline-secondary" 
                     size="sm"
-                    onClick={() => handleQuantityChange(item.productId, item.quantity + 1)}
+                    onClick={() => handleQuantityChange(item.productId, item.quantity + 1, item.nombre)}
                   >
                     +
                   </Button>
                 </div>
               </td>
-              <td>${(item.precio * item.quantity).toLocaleString()}</td>
+              <td className="fw-bold">${(item.precio * item.quantity).toLocaleString()}</td>
               <td>
                 <Button 
                   variant="danger" 
                   size="sm"
-                  onClick={() => handleRemove(item.productId)}
+                  onClick={() => handleRemove(item.productId, item.nombre)}
                 >
-                  Eliminar
+                  🗑️ Eliminar
                 </Button>
               </td>
             </tr>
@@ -123,21 +143,30 @@ const Cart = () => {
         </tbody>
       </Table>
 
-      <div className="d-flex justify-content-between align-items-center mt-4">
+      <div className="d-flex justify-content-between align-items-center mt-4 p-4 bg-light rounded">
         <div>
           <Button variant="outline-danger" onClick={handleClearCart}>
-            Vaciar Carrito
+            🧹 Vaciar Carrito
+          </Button>
+          <Button 
+            as={Link} 
+            to="/productos" 
+            variant="outline-success" 
+            className="ms-2"
+          >
+            ← Seguir Comprando
           </Button>
         </div>
         <div className="text-end">
-          <h4>Total: ${total.toLocaleString()}</h4>
+          <h4 className="mb-3">
+            Total: <span className="text-success">${total.toLocaleString()}</span>
+          </h4>
           <Button 
             variant="success" 
             size="lg" 
-            className="mt-2"
             onClick={handleCheckout}
           >
-            Proceder al Pago
+            💳 Proceder al Pago
           </Button>
         </div>
       </div>

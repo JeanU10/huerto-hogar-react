@@ -1,7 +1,9 @@
 // src/pages/Auth/Register.jsx
 import React, { useState } from 'react';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Card, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -19,15 +21,22 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (formData.password !== formData.confirmPassword) {
       setError('Las contraseñas no coinciden');
+      toast.error('Las contraseñas no coinciden', { icon: "❌" });
       return;
     }
 
-    // Simulación de registro
-    alert('Registro exitoso');
-    navigate('/login');
+    toast.success(
+      <div>
+        <strong>¡Cuenta creada exitosamente!</strong>
+        <div className="small mt-1">Bienvenido, {formData.nombre}</div>
+      </div>,
+      { icon: "🎉" }
+    );
+
+    setTimeout(() => navigate('/login'), 2000);
   };
 
   return (
@@ -35,8 +44,8 @@ const Register = () => {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Crear Cuenta</h2>
-          
-          {error && <Alert variant="danger">{error}</Alert>}
+
+          {error && <p className="text-danger text-center">{error}</p>}
 
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
