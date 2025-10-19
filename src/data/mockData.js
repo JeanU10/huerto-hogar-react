@@ -14,6 +14,7 @@ const initializeData = () => {
   if (!localStorage.getItem(STORAGE_KEYS.PRODUCTS) || localStorage.getItem('huerto_data_updated') !== 'v3') {
     const defaultProducts = [
       {
+        //Parámetros de los productos
         id: 1,
         nombre: 'Manzanas Orgánicas',
         descripcion: 'Manzanas rojas cultivadas sin pesticidas, frescas y crujientes. Perfectas para toda la familia.',
