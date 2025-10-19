@@ -1,8 +1,10 @@
-// src/App.js (ACTUALIZADO con rutas admin)
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavbarComponent from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+
+// Páginas públicas
 import Home from './pages/Home/Home';
 import Products from './pages/Products/Products';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
@@ -18,48 +20,60 @@ import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
 import PaymentError from './pages/PaymentError/PaymentError';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
+
+// Páginas de administración
 import Dashboard from './pages/Admin/Dashboard';
 import ProductsList from './pages/Admin/ProductsList';
 import ProductForm from './pages/Admin/ProductForm';
 import OrdersList from './pages/Admin/OrdersList';
+
+// Contexto y protección de rutas
+import { AuthProvider } from './context/AuthContext';
+import { AdminRoute } from './routes/guards';
+
+// Estilos
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <div className="d-flex flex-column min-vh-100">
-        <NavbarComponent />
-        <main className="flex-grow-1">
-          <Routes>
-            {/* Rutas públicas */}
-            <Route path="/" element={<Home />} />
-            <Route path="/productos" element={<Products />} />
-            <Route path="/producto/:id" element={<ProductDetail />} />
-            <Route path="/categorias" element={<Categories />} />
-            <Route path="/categoria/:slug" element={<Products />} />
-            <Route path="/ofertas" element={<Ofertas />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogDetail />} />
-            <Route path="/nosotros" element={<Nosotros />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/carrito" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/pago-exitoso" element={<PaymentSuccess />} />
-            <Route path="/pago-error" element={<PaymentError />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            
-            {/* Rutas de administración */}
-            <Route path="/admin" element={<Dashboard />} />
-            <Route path="/admin/productos" element={<ProductsList />} />
-            <Route path="/admin/productos/nuevo" element={<ProductForm />} />
-            <Route path="/admin/productos/editar/:id" element={<ProductForm />} />
-            <Route path="/admin/ordenes" element={<OrdersList />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <AuthProvider>
+        <div className="d-flex flex-column min-vh-100">
+          <NavbarComponent />
+          <main className="flex-grow-1">
+            <Routes>
+              {/* Rutas públicas */}
+              <Route path="/" element={<Home />} />
+              <Route path="/productos" element={<Products />} />
+              <Route path="/producto/:id" element={<ProductDetail />} />
+              <Route path="/categorias" element={<Categories />} />
+              <Route path="/categoria/:slug" element={<Products />} />
+              <Route path="/ofertas" element={<Ofertas />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogDetail />} />
+              <Route path="/nosotros" element={<Nosotros />} />
+              <Route path="/contacto" element={<Contacto />} />
+              <Route path="/carrito" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/pago-exitoso" element={<PaymentSuccess />} />
+              <Route path="/pago-error" element={<PaymentError />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+
+              {/* Rutas protegidas para Admin */}
+              <Route element={<AdminRoute />}>
+                <Route path="/admin" element={<Dashboard />} />
+                <Route path="/admin/productos" element={<ProductsList />} />
+                <Route path="/admin/productos/nuevo" element={<ProductForm />} />
+                <Route path="/admin/productos/editar/:id" element={<ProductForm />} />
+                <Route path="/admin/ordenes" element={<OrdersList />} />
+              </Route>
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </AuthProvider>
     </Router>
   );
 }

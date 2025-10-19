@@ -2,11 +2,13 @@
 import React, { useState } from 'react';
 import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({ correo: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,13 +16,21 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulación de login
-    if (formData.correo && formData.password) {
-      alert('Inicio de sesión exitoso');
-      navigate('/');
-    } else {
-      setError('Por favor completa todos los campos');
+    const { correo, password } = formData;
+
+    // Validación de admin
+    if (correo === 'admin@huertohogar.cl' && password === 'admin123') {
+      login({ email: correo, role: 'admin' });
+      return navigate('/admin');
     }
+
+    // Validación de usuario normal
+    if (correo && password) {
+      login({ email: correo, role: 'user' });
+      return navigate('/');
+    }
+
+    setError('Por favor completa todos los campos');
   };
 
   return (
@@ -28,7 +38,7 @@ const Login = () => {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Iniciar Sesión</h2>
-          
+
           {error && <Alert variant="danger">{error}</Alert>}
 
           <Form onSubmit={handleSubmit}>

@@ -116,10 +116,10 @@ const initializeData = () => {
       }
     ];
     localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(defaultProducts));
-    localStorage.setItem('huerto_data_updated', 'v2');
+    localStorage.setItem('huerto_data_updated', 'v3');
   }
 
-  if (!localStorage.getItem(STORAGE_KEYS.CATEGORIES) || localStorage.getItem('huerto_data_updated') !== 'v2') {
+  if (!localStorage.getItem(STORAGE_KEYS.CATEGORIES) || localStorage.getItem('huerto_data_updated') !== 'v3') {
     const defaultCategories = [
       { 
         id: 1, 
@@ -155,10 +155,10 @@ const initializeData = () => {
       }
     ];
     localStorage.setItem(STORAGE_KEYS.CATEGORIES, JSON.stringify(defaultCategories));
-    localStorage.setItem('huerto_data_updated', 'v2');
+    localStorage.setItem('huerto_data_updated', 'v3');
   }
 
-  if (!localStorage.getItem(STORAGE_KEYS.BLOGS) || localStorage.getItem('huerto_data_updated') !== 'v2') {
+  if (!localStorage.getItem(STORAGE_KEYS.BLOGS) || localStorage.getItem('huerto_data_updated') !== 'v3') {
     const defaultBlogs = [
       {
         id: 1,
@@ -192,7 +192,7 @@ const initializeData = () => {
       }
     ];
     localStorage.setItem(STORAGE_KEYS.BLOGS, JSON.stringify(defaultBlogs));
-    localStorage.setItem('huerto_data_updated', 'v2');
+    localStorage.setItem('huerto_data_updated', 'v3');
   }
 
   if (!localStorage.getItem(STORAGE_KEYS.CART)) {

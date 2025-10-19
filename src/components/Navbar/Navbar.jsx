@@ -3,18 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
 import { getCart, getCartTotal } from '../../data/mockData';
+import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
 const NavbarComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
 
+  // 🔐 AuthContext
+  const { isAuthenticated, role, logout } = useAuth();
+
   useEffect(() => {
     updateCartInfo();
-    
-    // Escuchar cambios en el carrito
     window.addEventListener('cartUpdated', updateCartInfo);
-    
     return () => {
       window.removeEventListener('cartUpdated', updateCartInfo);
     };
@@ -45,10 +46,24 @@ const NavbarComponent = () => {
             <Nav.Link as={Link} to="/nosotros">Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/blog">Blog</Nav.Link>
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+
+            {/* 🔐 Mostrar ruta Admin solo si el usuario es admin */}
+            {role === 'admin' && (
+              <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
+            )}
           </Nav>
+
           <Nav>
-            <Nav.Link as={Link} to="/login">Iniciar Sesión</Nav.Link>
-            <Nav.Link as={Link} to="/register">Crear Cuenta</Nav.Link>
+            {/* 🔐 Mostrar opciones según autenticación */}
+            {isAuthenticated ? (
+              <Nav.Link onClick={logout}>Salir</Nav.Link>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/login">Iniciar Sesión</Nav.Link>
+                <Nav.Link as={Link} to="/register">Crear Cuenta</Nav.Link>
+              </>
+            )}
+
             <Nav.Link as={Link} to="/carrito" className="position-relative">
               🛒 Carrito ${cartTotal.toLocaleString()}
               {cartItemCount > 0 && (
