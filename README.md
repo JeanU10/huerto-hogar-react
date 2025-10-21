@@ -1,7 +1,7 @@
 # 🌱 HuertoHogar - Plataforma de Productos Orgánicos
 
 <div align="center">
-  <img src="public/images/logo.png" alt="HuertoHogar Logo" width="200" height="200">
+  <img src="public/images/hero-bg.png" alt="HuertoHogar Logo" width="200" height="200">
   
   **Conectando el campo con tu hogar**
   
