@@ -11,16 +11,15 @@
 </div>
 
 ---
-
-## 📋 Descripción del Proyecto
-
-**HuertoHogar** es una plataforma web innovadora que conecta directamente a las familias chilenas con productores locales de alimentos orgánicos y frescos. Nuestra misión es promover una alimentación saludable y sostenible, apoyando a los agricultores locales mientras cuidamos el medio ambiente.
-
 ### 🧑‍💻 Desarrollado por:
 
 - **Jean P. Valenzuela Navarrete**
 - **Matias Eduardo Reyes Agilera**
 - **Cristobal Andres Cea Guzman**
+
+## 📋 Descripción del Proyecto
+
+**HuertoHogar** es una plataforma web innovadora que conecta directamente a las familias chilenas con productores locales de alimentos orgánicos y frescos. Nuestra misión es promover una alimentación saludable y sostenible, apoyando a los agricultores locales mientras cuidamos el medio ambiente.
 
 ### 🎯 Objetivos Principales
 
