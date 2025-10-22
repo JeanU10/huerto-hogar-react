@@ -16,6 +16,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:jest": "jest",
+    "test:jasmine": "jasmine",
+    "test:karma": "karma start",
+    "test:all": "npm run test:jest && npm run test:jasmine && npm run test:karma",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,6 +51,7 @@
     "babel-loader": "^10.0.0",
     "babel-plugin-istanbul": "^7.0.1",
     "css-loader": "^7.1.2",
+    "identity-obj-proxy": "^3.0.0",
     "jasmine": "^5.12.0",
     "jasmine-core": "^5.12.0",
     "karma": "^6.4.4",

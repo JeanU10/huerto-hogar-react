@@ -1,17 +1,20 @@
 // Karma configuration
-
 module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'src/test-setup.js',
+      'src/tests/setup/karma.setup.js',
+      'src/tests/**/*.test.js',
+      'src/tests/**/*.test.jsx',
       'src/**/*.test.js',
       'src/**/*.test.jsx'
     ],
     exclude: [],
     preprocessors: {
-      'src/test-setup.js': ['webpack'],
+      'src/tests/setup/karma.setup.js': ['webpack'],
+      'src/tests/**/*.test.js': ['webpack'],
+      'src/tests/**/*.test.jsx': ['webpack'],
       'src/**/*.test.js': ['webpack'],
       'src/**/*.test.jsx': ['webpack']
     },
@@ -39,7 +42,12 @@ module.exports = function(config) {
         extensions: ['.js', '.jsx']
       }
     },
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage/',
+      subdir: '.'
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -50,7 +58,8 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-chrome-launcher',
-      'karma-webpack'
+      'karma-webpack',
+      'karma-coverage'
     ]
   });
 };
