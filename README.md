@@ -67,8 +67,36 @@
 ### Desarrollo
 - **Create React App** - Herramienta de configuración inicial
 - **ESLint** - Linter para mantener calidad de código
-- **Jest** - Framework de testing
+- **Karma/Jasmine** - Framework de testing
 - **Webpack** - Bundler de módulos
+
+### Testing
+- **Tests de Navegación**: Verificación de rutas y enlaces
+  - Logo y marca
+  - Enlaces principales
+  - Navegación completa
+- **Tests de Autenticación**: Verificación de acceso
+  - Enlaces de inicio de sesión
+  - Enlaces de registro
+- **Tests de Carrito**: Verificación de funcionalidad básica
+  - Estado inicial del carrito
+  - Enlace a la página de carrito
+- **Tests de Footer**: Verificación de información
+  - Datos de contacto
+  - Enlaces rápidos
+  - Copyright
+
+#### Ejecutar Tests
+```bash
+# Ejecución única
+npx karma start --single-run
+
+# Modo desarrollo (watch mode)
+npx karma start
+
+# Modo debug con Chrome
+npx karma start --browsers Chrome
+```
 
 ### Almacenamiento
 - **LocalStorage** - Persistencia de datos del cliente
@@ -217,6 +245,59 @@ huerto-hogar-react/
 - Escribir tests para nuevas funcionalidades
 - Documentar cambios importantes
 - Mantener la coherencia del diseño
+
+---
+
+## 🧪 Testing
+
+### Framework y Herramientas
+- **Karma**: Test runner para ejecutar los tests
+- **Jasmine**: Framework de testing
+- **React Testing Library**: Librería para testing de componentes React
+- **Chrome Headless**: Navegador para ejecución de tests
+
+### Test Suites Principales
+1. **Tests de Navegación**
+   - Verificación de rutas y redirecciones
+   - Funcionamiento de guards de rutas
+   - Comportamiento del navbar
+
+2. **Tests de Autenticación**
+   - Login de usuarios
+   - Registro de usuarios
+   - Persistencia de sesión
+
+3. **Tests de Carrito de Compras**
+   - Agregar/remover productos
+   - Actualizar cantidades
+   - Cálculo de totales
+
+4. **Tests de Componentes UI**
+   - Footer y links
+   - ProductCard y renderizado
+   - CategoryCard y navegación
+
+### Ejecución de Tests
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+
+2. Ejecutar todos los tests:
+   ```bash
+   npm test
+   ```
+
+3. Ejecutar tests con coverage:
+   ```bash
+   npm run test:coverage
+   ```
+
+### Convenciones de Testing
+- Usar descripciones claras para los test suites y casos
+- Seguir el patrón AAA (Arrange-Act-Assert)
+- Mantener tests independientes y atómicos
+- Mockear servicios externos cuando sea necesario
 
 ---
 
