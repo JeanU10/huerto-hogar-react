@@ -15,7 +15,6 @@
 
 - **Jean P. Valenzuela Navarrete**
 - **Matias Eduardo Reyes Agilera**
-- **Cristobal Andres Cea Guzman**
 
 ## 📋 Descripción del Proyecto
 
