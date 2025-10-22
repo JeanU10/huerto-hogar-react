@@ -20,8 +20,6 @@
 
 - **Jean P. Valenzuela Navarrete**
 - **Matias Eduardo Reyes Agilera**
-- **Cristobal Andres Cea Guzman**
-
 ### 🎯 Objetivos Principales
 
 - **Frescura Garantizada**: Productos directamente del campo a tu mesa
