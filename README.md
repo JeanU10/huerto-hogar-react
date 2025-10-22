@@ -20,7 +20,6 @@
 
 - **Jean P. Valenzuela Navarrete**
 - **Matias Eduardo Reyes Agilera**
-- **Cristobal Andres Cea Guzman**
 
 ### 🎯 Objetivos Principales
 
