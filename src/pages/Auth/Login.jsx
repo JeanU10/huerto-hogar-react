@@ -1,97 +1,82 @@
-// src/pages/Auth/Login.jsx (CON AUTH)
-import React, { useState } from 'react';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
-const Login = () => {
-  const [formData, setFormData] = useState({ correo: '', password: '' });
-  const [error, setError] = useState('');
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { login, error } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { login } = useAuth();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError('');
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    const result = await login({ email, password });
     
-    const { correo, password } = formData;
+    setIsLoading(false);
 
-    // Credenciales de administrador
-    if (correo === 'admin@huertohogar.cl' && password === 'admin123') {
-      login({ email: correo, role: 'admin' });
-      toast.success('¡Bienvenido Administrador!', { icon: '👨‍💼' });
-      navigate('/admin');
-      return;
-    }
-
-    // Usuario normal (cualquier otra combinación válida)
-    if (correo && password) {
-      login({ email: correo, role: 'user' });
-      toast.success(`¡Bienvenido de nuevo!`, { icon: '👋' });
+    if (result.success) {
       navigate('/');
-      return;
     }
-
-    setError('Por favor completa todos los campos');
-    toast.error('Credenciales inválidas', { icon: '❌' });
   };
 
   return (
-    <Container className="py-5" style={{ maxWidth: '500px' }}>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Iniciar Sesión</h2>
-          
-          {error && <Alert variant="danger">{error}</Alert>}
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="text-center mb-4">Iniciar Sesión</h2>
+              
+              {error && (
+                <div className="alert alert-danger" role="alert">
+                  {error}
+                </div>
+              )}
 
-          <Alert variant="info">
-            <strong>Credenciales de prueba:</strong><br/>
-            <small>Admin: admin@huertohogar.cl / admin123</small><br/>
-            <small>Usuario: cualquier correo / cualquier contraseña</small>
-          </Alert>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
 
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Correo electrónico</Form.Label>
-              <Form.Control
-                type="email"
-                name="correo"
-                value={formData.correo}
-                onChange={handleChange}
-                placeholder="admin@huertohogar.cl"
-                required
-              />
-            </Form.Group>
+                <div className="mb-3">
+                  <label className="form-label">Contraseña</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="admin123"
-                required
-              />
-            </Form.Group>
+                <button 
+                  type="submit" 
+                  className="btn btn-success w-100"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+                </button>
+              </form>
 
-            <Button variant="success" type="submit" className="w-100 mb-3">
-              Iniciar Sesión
-            </Button>
-
-            <p className="text-center">
-              ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
-            </p>
-          </Form>
-        </Card.Body>
-      </Card>
-    </Container>
+              <p className="text-center mt-3">
+                ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-};
+}
 
 export default Login;
