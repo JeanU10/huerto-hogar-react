@@ -1,7 +1,15 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { authService, userService } from '../services/api';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 export const AuthContext = createContext();
+
+// Hook personalizado para usar el contexto
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth debe ser usado dentro de un AuthProvider');
+  }
+  return context;
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -17,17 +25,6 @@ export const AuthProvider = ({ children }) => {
         
         if (token && userData) {
           setUser(JSON.parse(userData));
-          
-          // Verificar token con el backend
-          try {
-            const response = await userService.getProfile();
-            setUser(response.data.user);
-          } catch (err) {
-            // Token inválido, limpiar
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            setUser(null);
-          }
         }
       } catch (err) {
         console.error('Error cargando usuario:', err);
@@ -42,16 +39,21 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       setError(null);
-      const response = await authService.register(userData);
-      const { token, user } = response.data;
+      // Simulación - reemplazar con llamada real a API
+      const mockUser = {
+        id: Date.now(),
+        email: userData.email,
+        username: userData.username,
+        role: userData.role || 'user'
+      };
       
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-      setUser(user);
+      localStorage.setItem('token', 'mock-token');
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      setUser(mockUser);
       
       return { success: true };
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Error al registrar usuario';
+      const errorMessage = 'Error al registrar usuario';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     }
@@ -60,23 +62,29 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       setError(null);
-      const response = await authService.login(credentials);
-      const { token, user } = response.data;
+      // Simulación - reemplazar con llamada real a API
+      const mockUser = {
+        id: Date.now(),
+        email: credentials.email,
+        username: 'Usuario',
+        role: 'user'
+      };
       
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-      setUser(user);
+      localStorage.setItem('token', 'mock-token');
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      setUser(mockUser);
       
       return { success: true };
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Error al iniciar sesión';
+      const errorMessage = 'Error al iniciar sesión';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     }
   };
 
   const logout = () => {
-    authService.logout();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setUser(null);
   };
 
