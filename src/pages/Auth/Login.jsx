@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login, error } = useContext(AuthContext);
+  const { login, error } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,7 +19,10 @@ function Login() {
     setIsLoading(false);
 
     if (result.success) {
+      toast.success('¡Bienvenido!', { icon: '👋' });
       navigate('/');
+    } else {
+      toast.error(result.error || 'Error al iniciar sesión', { icon: '❌' });
     }
   };
 

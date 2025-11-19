@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Container, Card, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
@@ -13,13 +14,15 @@ const Register = () => {
     confirmPassword: ''
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -28,15 +31,27 @@ const Register = () => {
       return;
     }
 
-    toast.success(
-      <div>
-        <strong>¡Cuenta creada exitosamente!</strong>
-        <div className="small mt-1">Bienvenido, {formData.nombre}</div>
-      </div>,
-      { icon: "🎉" }
-    );
+    setIsLoading(true);
+    const result = await register({
+      nombre: formData.nombre,
+      email: formData.correo,
+      password: formData.password
+    });
+    setIsLoading(false);
 
-    setTimeout(() => navigate('/login'), 2000);
+    if (result.success) {
+      toast.success(
+        <div>
+          <strong>¡Cuenta creada exitosamente!</strong>
+          <div className="small mt-1">Bienvenido, {formData.nombre}</div>
+        </div>,
+        { icon: "🎉" }
+      );
+      setTimeout(() => navigate('/'), 2000);
+    } else {
+      setError(result.error || 'Error al registrar usuario');
+      toast.error(result.error || 'Error al registrar usuario', { icon: "❌" });
+    }
   };
 
   return (
@@ -92,8 +107,8 @@ const Register = () => {
               />
             </Form.Group>
 
-            <Button variant="success" type="submit" className="w-100 mb-3">
-              Registrarse
+            <Button variant="success" type="submit" className="w-100 mb-3" disabled={isLoading}>
+              {isLoading ? 'Registrando...' : 'Registrarse'}
             </Button>
 
             <p className="text-center">
