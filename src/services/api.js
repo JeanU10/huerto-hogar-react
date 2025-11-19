@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// URL del backend (cambiar cuando despliegues)
+// URL del backend
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 // Crear instancia de axios
@@ -22,7 +22,7 @@ api.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-// Interceptor para manejar errores de respuesta
+// Interceptor para manejar errores
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -49,7 +49,6 @@ export const authService = {
 export const productService = {
   getAll: () => api.get('/products'),
   getById: (id) => api.get(`/products/${id}`),
-  getMyProducts: () => api.get('/products/my/products'),
   create: (productData) => api.post('/products', productData),
   update: (id, productData) => api.put(`/products/${id}`, productData),
   delete: (id) => api.delete(`/products/${id}`)
@@ -64,9 +63,7 @@ export const categoryService = {
 // Servicios de Usuarios
 export const userService = {
   getProfile: () => api.get('/users/me'),
-  getAllUsers: () => api.get('/users'),
-  updateRole: (userId, role) => api.put(`/users/${userId}/role`, { role }),
-  deleteUser: (userId) => api.delete(`/users/${userId}`)
+  getAllUsers: () => api.get('/users')
 };
 
 export default api;
