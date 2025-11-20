@@ -548,8 +548,8 @@ Si encuentras un bug o tienes una sugerencia:
 
 | Nombre | Rol | GitHub |
 |--------|-----|--------|
-| **Jean P. Valenzuela Navarrete** | Desarrollador Full Stack | [@jeanvalenzuela](https://github.com/jeanvalenzuela) |
-| **Matias Eduardo Reyes Agilera** | Desarrollador Full Stack | [@matiasreyes](https://github.com/matiasreyes) |
+| **Jean P. Valenzuela Navarrete** | Desarrollador Full Stack | [@jeanvalenzuela](https://github.com/JeanU10) |
+| **Matias Eduardo Reyes Agilera** | Desarrollador Full Stack | [@matiasreyes](https://github.com/MatiasReyes1925) |
 
 </div>
 
