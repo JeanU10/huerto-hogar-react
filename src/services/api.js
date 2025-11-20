@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-// URL del backend
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Usar ruta relativa en producción (gracias a Vercel rewrites)
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? '/api' 
+  : 'http://localhost:5000/api';
+
+console.log('🔗 API URL:', API_URL);
 
 // Crear instancia de axios
 const api = axios.create({
@@ -11,7 +15,7 @@ const api = axios.create({
   }
 });
 
-// Interceptor para agregar token a todas las peticiones
+// Interceptor para agregar token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
