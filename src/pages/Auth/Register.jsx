@@ -32,11 +32,15 @@ const Register = () => {
     }
 
     setIsLoading(true);
+    
+    // ✅ CORREGIDO: Enviar los campos con los nombres correctos
     const result = await register({
-      nombre: formData.nombre,
-      email: formData.correo,
-      password: formData.password
+      username: formData.nombre,  // ✅ Cambié 'nombre' por 'username'
+      email: formData.correo,      // ✅ Ya estaba correcto
+      password: formData.password, // ✅ Ya estaba correcto
+      role: 'user'                 // ✅ Agregué el rol por defecto
     });
+    
     setIsLoading(false);
 
     if (result.success) {
@@ -71,6 +75,7 @@ const Register = () => {
                 value={formData.nombre}
                 onChange={handleChange}
                 required
+                placeholder="Ej: Juan Pérez"
               />
             </Form.Group>
 
@@ -82,6 +87,7 @@ const Register = () => {
                 value={formData.correo}
                 onChange={handleChange}
                 required
+                placeholder="ejemplo@correo.com"
               />
             </Form.Group>
 
@@ -93,6 +99,8 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                minLength="6"
+                placeholder="Mínimo 6 caracteres"
               />
             </Form.Group>
 
@@ -104,10 +112,16 @@ const Register = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
+                placeholder="Repite tu contraseña"
               />
             </Form.Group>
 
-            <Button variant="success" type="submit" className="w-100 mb-3" disabled={isLoading}>
+            <Button 
+              variant="success" 
+              type="submit" 
+              className="w-100 mb-3" 
+              disabled={isLoading}
+            >
               {isLoading ? 'Registrando...' : 'Registrarse'}
             </Button>
 
